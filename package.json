@@ -1,11 +1,16 @@
 {
-  "name": "easy-workout",
+  "name": "ez-workout",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
+  "author": {
+    "name": "Gordon Mickel",
+    "email": "gordon.mickel@gmail.com",
+    "url": "https://mickel.tech"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gmickel/easy-workout"
+    "url": "https://github.com/gmickel/ez-workout"
   },
   "keywords": [
     "workout",

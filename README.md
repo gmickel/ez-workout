@@ -47,13 +47,13 @@ Change the seed data in `apps/web/src/db/seed.ts` to match your workouts.
 1. Clone the repository:
 
    ```
-   git clone https://github.com/gmickel/ez-workout-tracker.git
+   git clone https://github.com/gmickel/ez-workout.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd ez-workout-tracker
+   cd ez-workout
    ```
 
 3. Install dependencies:
