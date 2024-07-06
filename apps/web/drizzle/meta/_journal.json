@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1720169378422,
+      "tag": "0000_flaky_slapstick",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1720172663471,
+      "tag": "0001_mixed_micromax",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1720186064143,
+      "tag": "0002_dusty_master_mold",
+      "breakpoints": true
+    }
+  ]
+}

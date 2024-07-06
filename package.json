@@ -1,0 +1,46 @@
+{
+  "name": "easy-workout",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gmickel/easy-workout"
+  },
+  "keywords": [
+    "workout",
+    "template",
+    "turborepo",
+    "fitness",
+    "shadcn",
+    "nextjs"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "dev:ui": "turbo dev --experimental-ui",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
+    "clean": "turbo clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo build --filter=docs^... && changeset publish",
+    "ui:add:component": "turbo ui:add --filter=ui",
+    "prepare": "lefthook install",
+    "db:generate": "bun run --filter @repo/web generate",
+    "db:migrate": "bun run --filter @repo/web migrate",
+    "db:studio": "bun run --filter @repo/web studio"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@changesets/cli": "2.27.7",
+    "lefthook": "1.6.18",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.1.17",
+  "workspaces": ["apps/*", "packages/*"],
+  "trustedDependencies": ["@biomejs/biome", "esbuild", "lefthook"]
+}
