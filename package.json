@@ -34,13 +34,15 @@
     "prepare": "lefthook install",
     "db:generate": "bun run --filter @repo/web generate",
     "db:migrate": "bun run --filter @repo/web migrate",
-    "db:studio": "bun run --filter @repo/web studio"
+    "db:studio": "bun run --filter @repo/web studio",
+    "test": "turbo test"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@changesets/cli": "2.27.7",
     "lefthook": "1.6.18",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitest": "1.6.0"
   },
   "engines": {
     "node": ">=18"
