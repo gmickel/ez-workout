@@ -40,20 +40,30 @@ export function WorkoutLogger({
   };
 
   const handleLogSet = (log: ExerciseLog) => {
-    setLogs([...logs, log]);
+    const newLogs = [...logs, log];
+    setLogs(newLogs);
 
-    const exerciseTargets = {
-      [log.exerciseId]: {
-        sets: workout.exercises.find((e) => e.id === log.exerciseId)?.sets ?? 0,
-        reps:
-          workout.exercises.find((e) => e.id === log.exerciseId)?.reps ?? '0',
-      },
-    };
-    const newSuggestions = applyProgressiveOverload(
-      [...logs, log],
-      exerciseTargets,
+    const currentExercise = workout.exercises.find(
+      (e) => e.id === log.exerciseId,
     );
-    setWeightSuggestions({ ...weightSuggestions, ...newSuggestions });
+    if (currentExercise) {
+      const exerciseLogs = newLogs.filter(
+        (l) => l.exerciseId === log.exerciseId,
+      );
+      if (exerciseLogs.length === currentExercise.sets) {
+        const exerciseTargets = {
+          [log.exerciseId]: {
+            sets: currentExercise.sets,
+            reps: currentExercise.reps,
+          },
+        };
+        const newSuggestions = applyProgressiveOverload(
+          exerciseLogs,
+          exerciseTargets,
+        );
+        setWeightSuggestions({ ...weightSuggestions, ...newSuggestions });
+      }
+    }
   };
 
   const handleCompleteExercise = () => {

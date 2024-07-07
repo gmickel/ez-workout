@@ -14,12 +14,13 @@ export function suggestWeightIncrease(
 
   const targetReps = Number.parseInt(target.reps.split('-')[1] ?? target.reps);
 
-  if (currentLog.reps && currentLog.reps > targetReps) {
-    const allSetsExceeded = previousLogs.every(
-      (log) => !log.skipped && log.reps && log.reps > targetReps,
-    );
+  if (currentLog.reps && currentLog.reps >= targetReps + 4) {
+    const lastSetExceeded =
+      previousLogs.length === 0 ||
+      (previousLogs[previousLogs.length - 1]?.reps &&
+        (previousLogs[previousLogs.length - 1]?.reps ?? 0) >= targetReps);
 
-    if (allSetsExceeded) {
+    if (lastSetExceeded) {
       const suggestedIncrease =
         Math.round(((currentLog.weight ?? 0) * 0.05) / 2) * 2;
       return (currentLog.weight ?? 0) + suggestedIncrease;
