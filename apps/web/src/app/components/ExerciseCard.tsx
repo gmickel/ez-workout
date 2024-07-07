@@ -15,7 +15,7 @@ import {
 import { Input } from '@ui/components/ui/input';
 import { Label } from '@ui/components/ui/label';
 import { ChevronDown } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 type ExerciseCardProps = {
   exercise: Exercise;
@@ -37,6 +37,7 @@ export default function ExerciseCard({
   const [notes, setNotes] = useState<string>('');
   const [skipped, setSkipped] = useState<boolean>(false);
   const [completedSets, setCompletedSets] = useState<number>(0);
+  const repsInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Prefill weight based on previous data or suggested weight
@@ -65,6 +66,8 @@ export default function ExerciseCard({
     if (!skipped) {
       setReps(0);
       setNotes('');
+      // Focus on the reps input after logging a set
+      setTimeout(() => repsInputRef.current?.focus(), 0);
     }
 
     if (completedSets + 1 >= exercise.sets) {
@@ -72,12 +75,14 @@ export default function ExerciseCard({
     }
   };
 
+  const currentSet = completedSets + 1;
+
   return (
     <Card className="mb-4">
       <CardHeader>
         <h3 className="text-xl font-bold">{exercise.name}</h3>
         <p>
-          Target: {exercise.sets} sets of {exercise.reps}
+          Set {currentSet} of {exercise.sets} | Target: {exercise.reps} reps
         </p>
         {suggestedWeight && <p>Suggested weight: {suggestedWeight}kg</p>}
       </CardHeader>
@@ -110,6 +115,7 @@ export default function ExerciseCard({
                 <Label htmlFor="reps">Reps</Label>
                 <Input
                   autoFocus
+                  ref={repsInputRef}
                   id="reps"
                   type="number"
                   value={reps ?? ''}
@@ -209,7 +215,7 @@ export default function ExerciseCard({
           disabled={completedSets >= exercise.sets}
           className="w-full"
         >
-          {skipped ? 'Log Skipped Set' : 'Log Set'} ({completedSets}/
+          {skipped ? 'Log Skipped Set' : 'Log Set'} ({currentSet}/
           {exercise.sets})
         </Button>
       </CardFooter>
