@@ -64,12 +64,14 @@ export async function GET(
           .map((log) => log.weight)
           .filter((w): w is number => w !== null);
 
+        const lastSets = logs
+          .map((log) => log.reps)
+          .filter((r): r is number => r !== null);
+
         result[exercise.id] = {
           lastWorkoutDate: recentLog.date ? recentLog.date.toISOString() : null,
           lastWeight: weights.length > 0 ? Math.max(...weights) : null,
-          lastSets: logs
-            .map((log) => log.reps ?? 0)
-            .filter((reps): reps is number => reps !== null),
+          lastSets,
           recentNotes,
           wasSkipped: logs.some((log) => log.skipped),
         };

@@ -33,10 +33,38 @@ export function WorkoutLogger({
       if (response.ok) {
         const data = await response.json();
         setPreviousExerciseData(data);
+        calculateWeightSuggestions(data);
       }
     } catch (error) {
       console.error('Error fetching previous workout data:', error);
     }
+  };
+
+  const calculateWeightSuggestions = (
+    prevData: Record<number, PreviousExerciseData>,
+  ) => {
+    const suggestions: Record<number, number> = {};
+    for (const exercise of workout.exercises) {
+      const prevExerciseData = prevData[exercise.id];
+      if (prevExerciseData && prevExerciseData.lastSets.length > 0) {
+        const lastSet =
+          prevExerciseData.lastSets[prevExerciseData.lastSets.length - 1];
+        const targetReps = Number.parseInt(
+          exercise.reps.split('-')[1] ?? exercise.reps,
+        );
+        if (
+          lastSet &&
+          lastSet >= targetReps + 4 &&
+          prevExerciseData.lastWeight
+        ) {
+          const suggestedIncrease =
+            Math.round((prevExerciseData.lastWeight * 0.05) / 2) * 2;
+          suggestions[exercise.id] =
+            prevExerciseData.lastWeight + suggestedIncrease;
+        }
+      }
+    }
+    setWeightSuggestions(suggestions);
   };
 
   const handleLogSet = (log: ExerciseLog) => {
