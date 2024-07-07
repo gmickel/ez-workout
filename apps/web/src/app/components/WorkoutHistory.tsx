@@ -1,8 +1,8 @@
 import { CalendarComponent } from '@/app/components/Calendar';
+import ProgressCharts from '@/app/components/ProgressCharts';
+import { WorkoutCard } from '@/app/components/WorkoutCard';
 import type { WorkoutLog } from '@/types';
-// components/WorkoutHistory.tsx
 import React, { useState, useEffect } from 'react';
-import { WorkoutCard } from './WorkoutCard';
 
 export function WorkoutHistory() {
   const [workoutLogs, setWorkoutLogs] = useState<WorkoutLog[]>([]);
@@ -38,33 +38,9 @@ export function WorkoutHistory() {
       )
     : workoutLogs;
 
-  /*
-  const chartData = workoutLogs.map((log) => ({
-    date: new Date(log.date).toLocaleDateString(),
-    totalWeight: log.exercises.reduce(
-      (total, exercise) =>
-        total +
-        exercise.sets.reduce(
-          (setTotal, set) => setTotal + (set.weight ?? 0),
-          0,
-        ),
-      0,
-    ),
-    totalSets: log.exercises.reduce(
-      (total, exercise) => total + exercise.sets.length,
-      0,
-    ),
-    totalReps: log.exercises.reduce(
-      (total, exercise) =>
-        total +
-        exercise.sets.reduce((setTotal, set) => setTotal + (set.reps ?? 0), 0),
-      0,
-    ),
-  }));
-  */
-
   return (
     <div className="space-y-6">
+      <ProgressCharts workoutLogs={workoutLogs} />
       <CalendarComponent
         workouts={workoutLogs.map((log) => ({
           date: log.date,
