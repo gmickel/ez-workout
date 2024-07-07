@@ -6,6 +6,7 @@ EZ Workout Tracker is a sleek, user-friendly (read: quick and dirty) application
 
 - **Workout Logging**: Easily log your workouts with customizable exercises, sets, reps, and weights.
 - **Progress Tracking**: Visualize your progress with interactive charts showing total weight lifted, sets completed, and reps performed over time.
+- **Progressive Overload**: Monitor your progress and automatically adjust your workouts accordingly.
 - **Workout History**: Review your past workouts with a detailed history view and an interactive calendar.
 - **Dark Mode**: Toggle between light and dark modes for comfortable viewing in any environment.
 - **Responsive Design**: Enjoy a seamless experience on both desktop and mobile devices.
